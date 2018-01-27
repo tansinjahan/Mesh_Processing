@@ -48,7 +48,7 @@ print(boundaryVertices)
 
 #print(listOfAdjacentFaces)
 
-for i in range(1,12):
+for i in range(1,50):
     positions = [];
     for vertex_V in range(len(listOfVertices)):
         if vertex_V in boundaryVertices:
