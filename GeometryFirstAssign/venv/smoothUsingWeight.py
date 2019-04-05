@@ -4,16 +4,13 @@ import pymesh.meshutils
 import pymesh.triangulate
 import numpy as np
 
-mesh=pymesh.load_mesh("/home/tansin/Downloads/noisy_vase.obj")
-mesh.enable_connectivity()
+mesh=pymesh.load_mesh("/home/tansin/Downloads/noisy_models/noisy_bunny.obj");
+mesh.enable_connectivity();
 
-listOfVertices = mesh.vertices
-listOfFaces = mesh.faces
-print(listOfFaces)
-print(listOfVertices)
-mesh.add_attribute('face_area')
-listOfFacesAreas = mesh.get_attribute('face_area')
-#print(mesh.get_attribute('face_area')[0])
+listOfVertices = mesh.vertices;
+listOfFaces = mesh.faces;
+print(listOfFaces);
+print(listOfVertices);
 
 facesOnBoundary = []
 for faces_V in range(len(listOfFaces)):
@@ -51,7 +48,7 @@ print(boundaryVertices)
 
 #print(listOfAdjacentFaces)
 
-for i in range(1,50):
+for i in range(1,30):
     positions = [];
     for vertex_V in range(len(listOfVertices)):
         if vertex_V in boundaryVertices:
@@ -61,40 +58,28 @@ for i in range(1,50):
         yPosition = 0
         zPosition = 0
         vertex_new = []
-        totalweight = 0;
-
         adjacentOfVertex = mesh.get_vertex_adjacent_vertices(vertex_V)
-        adjacentfaces_of_vertex_V = mesh.get_vertex_adjacent_faces(vertex_V)
 
-        twoFaceIncidentWeight = 0;
         for vertex_U in adjacentOfVertex:
+            print(vertex_U)
+            adjacentList = (listOfVertices[vertex_U]);
 
-            adjacentfaces_of_vertex_U = mesh.get_vertex_adjacent_faces(vertex_U)
+            xPosition += adjacentList[0];
+            yPosition += adjacentList[1];
+            zPosition += adjacentList[2];
 
-            common = np.intersect1d(adjacentfaces_of_vertex_V, adjacentfaces_of_vertex_U)
-            print(common)
-            for faceIdx in common:
-                twoFaceIncidentWeight += listOfFacesAreas[faceIdx]
+        xPosition = xPosition/len(adjacentOfVertex)
+        yPosition = yPosition/len(adjacentOfVertex)
+        zPosition = zPosition/len(adjacentOfVertex)
 
-            adjacentList = (listOfVertices[vertex_U])
-
-            xPosition += adjacentList[0] * twoFaceIncidentWeight
-            yPosition += adjacentList[1] * twoFaceIncidentWeight
-            zPosition += adjacentList[2] * twoFaceIncidentWeight
-            totalweight += twoFaceIncidentWeight
-
-        xPosition = xPosition/totalweight
-        yPosition = yPosition/totalweight
-        zPosition = zPosition/totalweight
-
-        vertex_new.append(xPosition)
-        vertex_new.append(yPosition)
-        vertex_new.append(zPosition)
+        vertex_new.append(xPosition);
+        vertex_new.append(yPosition);
+        vertex_new.append(zPosition);
 
         listOfVertices[vertex_V] = vertex_new
 
 
 new_mesh = pymesh.form_mesh(listOfVertices, mesh.faces)
-pymesh.meshio.save_mesh("new_vase_scheme2.obj", new_mesh)
+pymesh.meshio.save_mesh("output/new_bunny_weight.obj", new_mesh)
 
 

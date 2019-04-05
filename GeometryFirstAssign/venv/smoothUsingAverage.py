@@ -4,7 +4,7 @@ import pymesh.meshutils
 import pymesh.triangulate
 import numpy as np
 
-mesh=pymesh.load_mesh("/home/tansin/Downloads/noisy_bunny.obj");
+mesh=pymesh.load_mesh("/home/tansin/Downloads/noisy_models/noisy_bunny.obj");
 mesh.enable_connectivity();
 
 listOfVertices = mesh.vertices;
@@ -45,7 +45,7 @@ for i in range(1,30):
 
     #mesh.vertices = positions;
     new_mesh = pymesh.form_mesh(listOfVertices, mesh.faces)
-pymesh.meshio.save_mesh("new_bunny_first.obj", new_mesh)
+pymesh.meshio.save_mesh("output/new_bunny_avg.obj", new_mesh)
 #print (listOfVertices);
 
 
