@@ -1,4 +1,4 @@
-## This repository contains three different algorithms for Mesh Smooting
+## This repository contains three different algorithms for Mesh Smoothing
 1. Basic mesh smoothing implementation. 
 > The program loads a mesh from a file, smooths the mesh by moving each vertex to the average of its neighbors, and then saves the mesh into another file. Care is taken to update the vertex positions only at the end of an iteration.
 
