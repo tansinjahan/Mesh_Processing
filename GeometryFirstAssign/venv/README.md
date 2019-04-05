@@ -11,4 +11,4 @@
 ##### run instruction - python <filename.py>
 
 ![Smooth mesh](https://github.com/tansinjahan/Mesh_Processing/tree/master/GeometryFirstAssign/venv/screenshot/bunny_1.png)
-
+![Smooth mesh](https://github.com/tansinjahan/Mesh_Processing/blob/master/GeometryFirstAssign/venv/screenshot/bunny_2.png)
